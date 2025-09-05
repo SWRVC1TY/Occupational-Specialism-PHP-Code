@@ -1,15 +1,17 @@
-<html>
-    <head>
-    <title>harris</title>
+<?php // opens php code section
+    echo"<!DOCTYPE html>";
+    echo"<html>";
 
+        echo"<head>";
+            echo"<title>harris</title>";
+        echo"</head>";
 
-    </head>
-    <body>
-    <h1>harris</h1>
-    <?php // opens php code section
-    echo "this is my page"; // displays text
+        echo"<body>";
+            echo"<h1>harris</h1>";
 
-    ?>
-    </body>
-</html>
+            echo "this is my page"; // displays text
+        echo"</body>";
+
+    echo"</html>";
+?>
 
