@@ -1,0 +1,25 @@
+body {
+    color: lightcyan;
+    font-family: Arial, Microsoft Himalaya, sans-serif;/*gives the website what font to load and then alternate fonts with the last one listed being a fallback*/
+    background-color: #2d545e;
+
+}
+
+#image1 {
+    border: blue 10px dotted;
+}
+#male {
+    color: blue;
+}
+#female {
+    color: deeppink;
+}
+#submit{
+
+}
+#num{
+
+}
+#date{
+
+}

@@ -1,0 +1,20 @@
+<?php // opens php code section
+echo"<!DOCTYPE html>";
+echo"<html>";
+echo"<head>";
+echo"<title>Image</title>";
+echo"<link rel='stylesheet' href='CSS/styles.css'>";
+echo"</head>";
+echo"<body>";
+echo"this is a gorrilla";
+echo"<br></br>";
+echo "<img id = 'image1' src='images/gorrila.gif'>";
+echo"<br></br>";
+echo"<ul>";
+echo"<li>he is trying to escape</li>";
+echo"<li>his efforts are in vain....</li>";
+echo"</ul>";
+echo"<br></br>";
+echo"<a href = 'index.php'> Home </a>";
+echo"</body>";
+echo"</html>";
