@@ -30,7 +30,7 @@ echo "<br>";
 echo "<h2> Media from The Transformers Movie:</h2>";  # sets a h2 heading as a welcome
 echo "<table>";
 echo "<td><p class = content>Download movie script: </p></td>";
-echo "<td><button><a href='Resources/Script.txt' download='Resources/Script.txt'><img src = 'Images/download.png' height='50' width='50'></a></button></td>";
+echo "<td><button class = download><a href='Resources/Script.txt' download='Resources/Script.txt'><img src = 'Images/download.png' height='25' width='25'></a></button></td>";
 
 echo "</body>";
 

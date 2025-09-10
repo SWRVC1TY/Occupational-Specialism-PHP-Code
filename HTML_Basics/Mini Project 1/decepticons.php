@@ -2,7 +2,7 @@
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo"<head>";
-echo"<title>Title</title>";
+echo"<title>Decepticons</title>";
 echo"<link rel='stylesheet' href='CSS/styles.css'>";
 echo"</head>";
 echo"<body>";

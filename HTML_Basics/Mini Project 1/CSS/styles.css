@@ -34,6 +34,12 @@ h2 {
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
     border: none;
 }
+.autobot{
+    height: auto;
+    width: auto;
+    max-width: 250px;
+    max-height: 400px;
+}
 
 .autobots:hover {
     background-color: blue; /* New background on hover */
@@ -55,4 +61,5 @@ h2 {
 }
 .download{
     background-color: #545454;
+    border:none;
 }
