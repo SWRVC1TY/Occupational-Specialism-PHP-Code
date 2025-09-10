@@ -14,6 +14,7 @@ echo "<tr>";  # opens the table row (tr)
 echo "<td> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
 echo "<td> <a href='media.php'>Media</a></td>";
 echo "<td> <a href='mail.php'>Mail List</a></td>";
+echo "<td> <a href='index.php'>Home</a></td>";
 echo "</tr>";  # closes the row of the table.
 echo "</table>";
 echo"</body>";
