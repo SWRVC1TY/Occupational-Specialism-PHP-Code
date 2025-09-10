@@ -4,7 +4,12 @@ body {
 }
 
 #formerslogo {
-    width: 20%;
+    width: 100%;
+    height: 300px;
+}
+nav {
+    background-color: #2d545e;
+    padding: 10px 0;
 }
 
 h2 {
@@ -13,8 +18,41 @@ h2 {
 
 .content {
     color:#ff7034;
+    font-size: large;
 }
 .header {
     color:#ff7034;
-    font-size: large;
+    font-size: x-large; /* larger front for the names*/
+}
+.b
+{
+    text-decoration: none;
+    text-underline: none;
+}
+.autobots {
+    background-color: #545454; /* Default background */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    border: none;
+}
+
+.autobots:hover {
+    background-color: blue; /* New background on hover */
+}
+
+.decepticons {
+    background-color: #545454; /* Default background */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    border: none;
+}
+
+.decepticons:hover {
+    background-color: red; /* New background on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+.mainbut
+{
+    background-color: #2d545e;
+}
+.download{
+    background-color: #545454;
 }

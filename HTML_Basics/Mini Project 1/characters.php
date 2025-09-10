@@ -15,58 +15,22 @@ echo "<body>";  # opens the body for the main content of the page.
 
 echo "<img id='formerslogo' src='Images/formerslogo.webp' alt='Transformers Logo' />";  #sets a logo up for the top of each page
 echo "<br>";  # line break for clarity and easy of reading.
-
+echo"<nav>";
 echo "<table>";  #table used to help with layout of my hyperlinks
 echo "<tr>";  # opens the table row (tr)
-echo "<td> <a href='plot.php'>Plot</a></td>"; #open a cell for a link to be housed
-echo "<td> <a href='media.php'>Media</a></td>";
-echo "<td> <a href='mail.php'>Mail List</a></td>";
-echo "<td> <a href='index.php'>Home</a></td>";
+echo "<td><button class = 'b'> <a href='plot.php'>Plot</a></button></td>"; #open a cell for a link to be housed
+echo "<td><button class = 'b'> <a href='media.php'>Media</a></button></td>";
+echo "<td><button class = 'b'> <a href='mail.php'>Mail List</a></button></td>";
+echo "<td> <button class = 'b'><a href='index.php'>Home</a></button></td>";
 echo "</tr>";  # closes the row of the table.
 echo "</table>";  # closes the table off
-
+echo"</nav>";
 echo "<br>";
 
-echo "<h2> Characters of The Transformers Movie<br><br>";  # sets a h2 heading as a welcome
+echo "<h2> Choose a side....";  # sets a h2 heading as a welcome
 echo "</h2>";
-
-echo "<img src='Images/optimus.png' alt='optimus prime' />";
-echo "<p class = header>Optimus Prime (Autobot):</p>";
-echo "<p class = content>Role: Leader of the Autobots</p>";
-echo"<p class = content>Description: Optimus Prime is the noble and courageous leader of the Autobots, dedicated to protecting life and liberty across the universe. He transforms into a red and blue semi-truck (or other vehicle forms, depending on continuity). Known for his wisdom, compassion, and unyielding resolve, Optimus embodies the ideals of freedom and justice. His unwavering determination to protect his people and defeat the Decepticons makes him the heart and soul of the Autobot resistance.</p>";
-
-echo"<br>";
-echo"<br>";
-
-echo "<img src='' alt='optimus prime' />";
-echo "<p class = header></p>";
-echo "<p class = content></p>";
-echo"<p class = content></p>";
-
-echo"<br>";
-echo"<br>";
-
-echo "<img src='' alt='optimus prime' />";
-echo "<p class = header></p>";
-echo "<p class = content></p>";
-echo"<p class = content></p>";
-
-echo"<br>";
-echo"<br>";
-
-echo "<img src='' alt='optimus prime' />";
-echo "<p class = header></p>";
-echo "<p class = content></p>";
-echo"<p class = content></p>";
-
-echo"<br>";
-echo"<br>";
-
-echo "<img src='' alt='optimus prime' />";
-echo "<p class = header></p>";
-echo "<p class = content></p>";
-echo"<p class = content></p>";
-echo "</body>";
+echo "<button class = 'autobots'><a href='autobots.php'><img src = 'Images/autobots.png' height='100' width='100'></a></buttonautobots>";
+echo "<button class = 'decepticons'><a href='decepticons.php'><img src = 'Images/decepticons.png' height='100' width='100'></a></button>";
 
 
 echo "</html>";

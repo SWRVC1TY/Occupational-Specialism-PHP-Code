@@ -14,16 +14,17 @@ echo "</head>";  # closes the head section of the page
 echo "<body>";  # opens the body for the main content of the page.
 
 echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";  #sets a logo up for the top of each page
-echo "<br>";  # line break for clarity and easy of reading.
-
+echo "<br>";# line break for clarity and easy of reading.
+echo"<nav>";
 echo "<table>";  #table used to help with layout of my hyperlinks
 echo "<tr>";  # opens the table row (tr)
-echo "<td> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
-echo "<td> <a href='plot.php'>Plot</a></td>";
-echo "<td> <a href='media.php'>Media</a></td>";
-echo "<td> <a href='mail.php'>Mail List</a></td>";
+echo "<td><button class = 'b'><a href='characters.php'>Characters</a></button></td>"; #open a cell for a link to be housed
+echo "<td><button class = 'b'><a href='plot.php'>Plot</a></button></td>";
+echo "<td><button class = 'b'><a href='media.php'>Media</a></button></td>";
+echo "<td><button class = 'b'><a href='mail.php'>Mail List</a></button></td>";
 echo "</tr>";  # closes the row of the table.
-echo "</table>";  # closes the table off
+echo "</table>";# closes the table off
+echo "</nav>";
 
 echo "<br>";
 
