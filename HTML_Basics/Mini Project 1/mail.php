@@ -21,7 +21,6 @@ echo "<tr>";  # opens the table row (tr)
 echo "<td> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
 echo "<td> <a href='plot.php'>Plot</a></td>";
 echo "<td> <a href='media.php'>Media</a></td>";
-echo "<td> <a href='mail.php'>Mail List</a></td>";
 echo "</tr>";  # closes the row of the table.
 echo "</table>";  # closes the table off
 
@@ -38,4 +37,3 @@ echo"<br>";
 echo"<input id = submit type='submit' name='submit' value='Submit'>"; // submit button to submit data to post
 
 echo "</html>";
-?>

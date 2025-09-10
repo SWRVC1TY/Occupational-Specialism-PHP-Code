@@ -1,5 +1,5 @@
 body {
-    background-color: #282b30;
+    background-color: #545454;
 
 }
 
@@ -8,9 +8,9 @@ body {
 }
 
 h2 {
-    color:#8f301b;
+    color:darkorange;
 }
 
 .content {
-    color:#a34e08;
+    color:#ff7034;
 }
