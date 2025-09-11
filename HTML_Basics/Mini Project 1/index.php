@@ -1,43 +1,59 @@
-<?php // This open the php code section
+<?php // Opens the PHP code block
 
-echo "<!DOCTYPE html>";  # essential html line to dictate the page type
+// Output the basic HTML structure using echo statements
 
-echo "<html>";  # opens the html content of the page
+echo "<!DOCTYPE html>";  // Defines the document type as HTML5
+echo "<html>";           // Opens the HTML document
 
-echo "<head>";  # opens the head section
+// ----- Head Section -----
+echo "<head>";           // Opens the head section of the HTML
 
-echo "<title> Mini Project 01</title>";  # sets the title of the page (web browser tab)
-echo "<link rel='stylesheet' type='text/css' href='css/styles.css' />";  # links to the external style sheet
+echo "<title>Mini Project 01</title>";  // Sets the title displayed in the browser tab
+echo "<link rel='stylesheet' type='text/css' href='CSS/styles.css' />";  // Links an external CSS file for styling
 
-echo "</head>";  # closes the head section of the page
+echo "</head>";          // Closes the head section
 
-echo "<body>";  # opens the body for the main content of the page.
+// ----- Body Section -----
+echo "<body>";           // Opens the body where main content will be displayed
 
-echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";  #sets a logo up for the top of each page
-echo "<br>";# line break for clarity and easy of reading.
-echo"<nav>";
-echo "<table>";  #table used to help with layout of my hyperlinks
-echo "<tr>";  # opens the table row (tr)
-echo "<td><button class = 'b'><a href='characters.php'>Characters</a></button></td>"; #open a cell for a link to be housed
-echo "<td><button class = 'b'><a href='plot.php'>Plot</a></button></td>";
-echo "<td><button class = 'b'><a href='media.php'>Media</a></button></td>";
-echo "<td><button class = 'b'><a href='mail.php'>Mail List</a></button></td>";
-echo "</tr>";  # closes the row of the table.
-echo "</table>";# closes the table off
-echo "</nav>";
+echo "<div class='content'>";  // Opens a div with class 'content' for wrapping main content
 
-echo "<br>";
+// Logo Image
+echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";  // Displays the Transformers logo image
 
-echo "<h2> Welcome to my Transformers Mini Project Website</h2>";  # sets a h2 heading as a welcome
+echo "<br>";             // Adds a line break for spacing
 
-echo "<p class='content'> The Transformers film is an 1980s animated feature length movie based on the TV shop of the same name. The movie screened in Cinemas from 12th December 1986 in the UK.</p>";
+// Navigation Section
+echo "<nav>";            // Opens navigation block
+echo "<table>";          // Opens a table to layout navigation buttons
+echo "<tr>";             // Starts a table row
 
-echo "<p class='content'> The movie, with its powerful 80s rock soundtrack follows the exploits of Hotrod and the rest of the Autobots against the newly formed Galvatron and the decepticons. </p>";
+// Navigation Buttons (each in a table cell)
+echo "<td><button class='b'><a href='characters.php'>Characters</a></button></td>"; // Link to Characters page
+echo "<td><button class='b'><a href='plot.php'>Plot</a></button></td>";             // Link to Plot page
+echo "<td><button class='b'><a href='media.php'>Media</a></button></td>";           // Link to Media page
+echo "<td><button class='b'><a href='mail.php'>Mail List</a></button></td>";        // Link to Mail List page
 
+echo "</tr>";            // Closes the table row
+echo "</table>";         // Closes the table
+echo "</nav>";           // Closes the navigation block
 
+echo "</div>";           // Closes the main content div
 
-echo "</body>";
+echo "<br>";             // Adds another line break for spacing
 
+// ----- Main Content -----
 
-echo "</html>";
+// Heading
+echo "<h2>Welcome to my Transformers Mini Project Website</h2>";  // Displays a welcome heading
+
+// Paragraphs
+echo "<p class='content'>The Transformers film is a 1980s animated feature-length movie based on the TV show of the same name. The movie screened in cinemas from 12th December 1986 in the UK.</p>";
+
+echo "<p class='content'>The movie, with its powerful 80s rock soundtrack, follows the exploits of HotRod and the rest of the Autobots against the newly formed Galvatron and the Decepticons.</p>";
+
+// ----- Closing Tags -----
+echo "</body>";          // Closes the body
+echo "</html>";          // Closes the HTML document
+
 ?>

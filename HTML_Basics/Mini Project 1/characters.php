@@ -29,8 +29,8 @@ echo "<br>";
 
 echo "<h2> Choose a side....";  # sets a h2 heading as a welcome
 echo "</h2>";
-echo "<button class = 'autobots'><a href='autobots.php'><img src = 'Images/autobots.png' height='100' width='100'></a></buttonautobots>";
-echo "<button class = 'decepticons'><a href='decepticons.php'><img src = 'Images/decepticons.png' height='100' width='100'></a></button>";
+echo "<button class = 'autobots'><a href='autobots.php'><img class = images src = 'Images/autobots.png'></a></buttonautobots>";
+echo "<button class = 'decepticons'><a href='decepticons.php'><img class = images src = 'Images/decepticons.png'></a></button>";
 
 
 echo "</html>";

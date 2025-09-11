@@ -1,66 +1,83 @@
-<?php // This open the php code section
+<?php // Opens PHP block
 
-echo "<!DOCTYPE html>";  # essential html line to dictate the page type
+// Begin outputting HTML document structure
+echo "<!DOCTYPE html>"; // Define the document type
+echo "<html>";
+echo "<head>";
+echo "<title>Mini Project 01</title>"; // Page title
+echo "<link rel='stylesheet' type='text/css' href='css/styles.css' />"; // Link to external CSS
+echo "</head>";
 
-echo "<html>";  # opens the html content of the page
-
-echo "<head>";  # opens the head section
-
-echo "<title> Mini Project 01</title>";  # sets the title of the page (web browser tab)
-echo "<link rel='stylesheet' type='text/css' href='css/styles.css' />";  # links to the external style sheet
-
-echo "</head>";  # closes the head section of the page
+// ---------- FORM DATA PROCESSING ----------
 $email = "";
 $freq = "";
 $data_received = false;
-if ($_SERVER["REQUEST_METHOD"] == "POST") { // selection statment to see if any data has been sent to POST
+
+// Check if the form was submitted using POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_received = true;
 }
+
+// Open the file for appending form submissions
 $myfile = fopen("User Data/Mailing list.txt", "a");
-echo "<body>";  # opens the body for the main content of the page.
 
-echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";  #sets a logo up for the top of each page
-echo "<br>";  # line break for clarity and easy of reading.
+// ---------- START BODY ----------
+echo "<body>";
 
-echo"<nav>";
-echo "<table>";  #table used to help with layout of my hyperlinks
-echo "<tr>";  # opens the table row (tr)
-echo "<td><button class = 'b'><a href='characters.php'>Characters</a></button></td>"; #open a cell for a link to be housed
-echo "<td><button class = 'b'><a href='plot.php'>Plot</a></button></td>";
-echo "<td><button class = 'b'><a href='media.php'>Media</a></button></td>";
-echo "<td><button class = 'b'><a href='index.php'>Home</a></button></td>";
-echo "</tr>";  # closes the row of the table.
-echo "</table>";  # closes the table off
-echo"</nav>";
+// Logo at the top
+echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";
 echo "<br>";
 
-echo "<h2> Sign up for the mailing list";  # sets a h2 heading as a welcome
+// ---------- NAVIGATION MENU ----------
+echo "<nav>";
+echo "<table>";
+echo "<tr>";
+echo "<td><button class='b'><a href='characters.php'>Characters</a></button></td>";
+echo "<td><button class='b'><a href='plot.php'>Plot</a></button></td>";
+echo "<td><button class='b'><a href='media.php'>Media</a></button></td>";
+echo "<td><button class='b'><a href='index.php'>Home</a></button></td>";
+echo "</tr>";
+echo "</table>";
+echo "</nav>";
+echo "<br>";
 
+// ---------- FORM HEADING ----------
+echo "<h2>Sign up for the mailing list</h2>";
+echo "<br>";
 
-echo "</body>";
-echo"<br>";
-echo"<form action='' method='POST'>";
-    echo"<label id='email' for='email'> Email: </label>";
-    echo"<input type='email' name='email' id = 'email' placeholder='Email' required>";
-    echo"<br>";
-    echo"<label for='freq'>Choose how often you want to receive promotional emails:</label>";
+// ---------- MAILING LIST FORM ----------
+echo"<div>";
+echo "<form action='' method='POST'>";
+echo "<label for='email' class = content>Email: </label>";
+echo "<input type='email' name='email' id='email' placeholder='Email' required>";
+echo "<br>";
 
-    echo"<select name='period' id='freq'>";
-    echo"<option value='Weekly'>Weekly</option>'";
-    echo"<option value='Bi-Weekly'>Bi-Weekly</option>";
-    echo"<option value='Monthly'>Monthly</option>";
-echo"</select>";
-    echo"<br>";
-    echo"<input id = submit type='submit' name='submits' value='Submit'>"; // submit button to submit data to post
-echo"</form>";
-echo"<br>";
+echo "<label for='freq' class = content>Choose how often you want to receive promotional emails:</label>";
+echo "<select name='period' id='freq'>";
+echo "<option value='Weekly'>Weekly</option>";
+echo "<option value='Bi-Weekly'>Bi-Weekly</option>";
+echo "<option value='Monthly'>Monthly</option>";
+echo "</select>";
+echo "<br>";
+
+echo "<input id='submit' type='submit' name='submits' value='Submit'>"; // Submit button
+echo "</form>";
+echo "<br>";
+echo "</div>";
+// ---------- DISPLAY CONFIRMATION & SAVE DATA ----------
 if ($data_received === true) {
-    $data ="Email: ".$_POST['email'].", "."Frequency: ".$_POST['period'];
-    fwrite($myfile, $data.PHP_EOL);
-    fclose($myfile);
-    echo "Welcome to the mailing list, the email that you have entered is:  " . $_POST["email"] . "<br>";
-    echo "You have chosen to receive promotional emails:  " . $_POST["period"] . "<br>";
+    $data = "Email: " . $_POST['email'] . ", Frequency: " . $_POST['period'];
 
+    // Write the submitted data to the file
+    fwrite($myfile, $data . PHP_EOL);
+    fclose($myfile); // Always close the file when done
+
+    // Display confirmation to user
+    echo "<p class = content>✅ Welcome to the mailing list!</p><br>";
+    echo "<p class = content>📧 Email entered: <strong>" . htmlspecialchars($_POST["email"]) . "</strong></p><br>";
+    echo "<p class = content>🗓️ Frequency selected: <strong>" . htmlspecialchars($_POST["period"]) . "</strong></p><br>";
 }
+
 echo "</body>";
 echo "</html>";
+?>

@@ -1,24 +1,43 @@
-<?php // opens php code section
-echo"<!DOCTYPE html>";
-echo"<html>";
-echo"<head>";
-echo"<title>Title</title>";
-echo"<link rel='stylesheet' href='CSS/styles.css'>";
-echo"</head>";
-echo"<body>";
-echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";  #sets a logo up for the top of each page
-echo "<br>";  # line break for clarity and easy of reading.
-echo"<nav>";
-echo "<table>";  #table used to help with layout of my hyperlinks
-echo "<tr>";  # opens the table row (tr)
-echo "<td><button class = 'b'><a href='characters.php'>Characters</a></button></td>"; #open a cell for a link to be housed
-echo "<td><button class = 'b'><a href='media.php'>Media</a></button></td>";
-echo "<td><button class = 'b'><a href='mail.php'>Mail List</a></button></td>";
-echo "<td><button class = 'b'><a href='index.php'>Home</a></button></td>";
-echo "</tr>";  # closes the row of the table.
-echo "</table>";
-echo"</nav>";
-echo"<p class = content>In 2005, the evil Decepticons have conquered the Autobots' home planet of Cybertron. The heroic Autobots, operating from Cybertron's two moons, prepare a counteroffensive. The Autobot leader, Optimus Prime, sends a shuttle to Autobot City on Earth for supplies. The Decepticons discover their plan, kill several Autobots, and hijack the ship.
+<?php // Open PHP tag
+
+// Output the DOCTYPE and start of the HTML document
+echo "<!DOCTYPE html>";
+echo "<html>";
+
+// ---------- HEAD SECTION ----------
+echo "<head>";
+echo "<title>Title</title>"; // Sets the title shown in the browser tab
+echo "<link rel='stylesheet' href='CSS/styles.css'>"; // Link to external CSS file
+echo "</head>";
+
+// ---------- BODY SECTION ----------
+echo "<body>";
+
+// Display the Transformers logo at the top of the page
+echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";
+echo "<br>"; // Adds a line break after the logo
+
+// ---------- NAVIGATION MENU ----------
+echo "<nav>";
+echo "<table>"; // Use a table for menu layout
+echo "<tr>"; // Begin a row for menu items
+
+// Navigation buttons (each one links to another page of the site)
+echo "<td><button class='b'><a href='characters.php'>Characters</a></button></td>";
+echo "<td><button class='b'><a href='media.php'>Media</a></button></td>";
+echo "<td><button class='b'><a href='mail.php'>Mail List</a></button></td>";
+echo "<td><button class='b'><a href='index.php'>Home</a></button></td>";
+
+echo "</tr>"; // Close the table row
+echo "</table>"; // Close the table
+echo "</nav>";
+
+// ---------- MAIN CONTENT ----------
+echo "<p class='content'>";
+
+// This is a long descriptive paragraph about the 1986 *Transformers: The Movie*
+// Text has been preserved exactly as provided, and styled using the 'content' CSS class
+echo "In 2005, the evil Decepticons have conquered the Autobots' home planet of Cybertron. The heroic Autobots, operating from Cybertron's two moons, prepare a counteroffensive. The Autobot leader, Optimus Prime, sends a shuttle to Autobot City on Earth for supplies. The Decepticons discover their plan, kill several Autobots, and hijack the ship.
 
 In Autobot City, Hot Rod is fishing with Daniel Witwicky (son of Spike Witwicky). Daniel spots a hole in the hijacked shuttle, Hot Rod sees the Decepticons and attacks, and the Decepticons leap into battle. Optimus arrives with reinforcements and engages the Decepticon leader, Megatron, in combat. Both are mortally wounded, forcing the Decepticons to retreat to space in Astrotrain. Optimus passes the Matrix of Leadership to Ultra Magnus, telling him that its power will light the Autobots' darkest hour, and dies.
 
@@ -32,7 +51,9 @@ The other Autobots land on the Planet of Junk, and they decide to use the junk t
 
 The arriving Autobots from Quintesson led by Hot Rod befriend Wreck-Gar and the Junkions, who in return rebuild Ultra Magnus. Realizing Galvatron now has the Matrix, the Autobots and the Junkions fly to Cybertron. Galvatron attempts to threaten Unicron, but like Ultra Magnus, cannot activate the Matrix. In response, Unicron transforms into a colossal robot and begins to dismember Cybertron. When Galvatron attacks him, Unicron swallows him and the Matrix whole.
 
-The Autobots arrive at the scene while Unicron continues to battle Decepticons, Junkions, and other defenders of Cybertron. Hot Rod's ship is damaged and he and his group of Autobots crash into Unicron's left eye. Daniel saves his father from Unicron's digestive system, and the group rescues several Autobots. Galvatron attempts to ally with Hot Rod, but Unicron forces him to attack. Hot Rod is almost killed but recovers and activates the Matrix, becoming Rodimus Prime, the new Autobot leader. Rodimus tosses Galvatron into space and uses the Matrix's power to destroy Unicron, then escapes with the other Autobots through Unicron's remaining eye. With the Decepticons in disarray, the Autobots celebrate the war's end and the retaking of their home planet while Unicron's severed head orbits Cybertron.</p>";
-echo"</body>";
-echo"</html>";
+The Autobots arrive at the scene while Unicron continues to battle Decepticons, Junkions, and other defenders of Cybertron. Hot Rod's ship is damaged and he and his group of Autobots crash into Unicron's left eye. Daniel saves his father from Unicron's digestive system, and the group rescues several Autobots. Galvatron attempts to ally with Hot Rod, but Unicron forces him to attack. Hot Rod is almost killed but recovers and activates the Matrix, becoming Rodimus Prime, the new Autobot leader. Rodimus tosses Galvatron into space and uses the Matrix's power to destroy Unicron, then escapes with the other Autobots through Unicron's remaining eye. With the Decepticons in disarray, the Autobots celebrate the war's end and the retaking of their home planet while Unicron's severed head orbits Cybertron.";
+
+echo "</p>"; // Close content paragraph
+echo "</body>"; // End of body
+echo "</html>"; // End of HTML document
 ?>
