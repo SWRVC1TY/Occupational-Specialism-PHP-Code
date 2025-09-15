@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    background-color: #EAEDDC;
+}
+
+#formerslogo {
+    width: fit-content;
+    height: 150px;
+}
+#nav {
+    width: auto;
+    align-items: center;
+    padding: 10px;
+    background-color: #A55656;
+}
+
+.content{
+    text-align: center;
+    font-size: x-large;
+    font-family: Arial Microsoft Himalaya sans-serif;
+    color: #4E468C;
+}

@@ -10,8 +10,8 @@ echo"</head>";
 
 echo"<body>";
 echo"<div class = 'container'>";
-    require_once = "assets/topbar.php";
-    require_once = "assets/nav.php";
+    require_once "assets/topbar.php";
+    require_once "assets/nav.php";
 
     echo"</div>";
     echo"</div>";
