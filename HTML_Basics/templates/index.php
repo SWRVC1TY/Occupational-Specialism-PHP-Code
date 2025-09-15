@@ -1,4 +1,5 @@
 <?php // opens php code section
+session_start(); // opens our connection to the session
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo "<head>";
