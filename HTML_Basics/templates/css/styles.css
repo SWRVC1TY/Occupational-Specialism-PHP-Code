@@ -4,6 +4,7 @@
     align-items: center;
     flex-direction: column;
 }
+
 nav ul {
     list-style-type: none; /* remove default breakpoints*/
     margin:0; /* removes default margin*/
@@ -18,20 +19,11 @@ nav li{
 nav li:hover{
     background-color: #4E468C;
 }
-
+.topbar{
+    /* enter top bar styling here*/
+}
 body {
     background-color: #EAEDDC;
-}
-
-#formerslogo {
-    width: fit-content;
-    height: 150px;
-}
-#nav {
-    width: auto;
-    align-items: center;
-    padding: 10px;
-    background-color: #A55656;
 }
 
 .content{
