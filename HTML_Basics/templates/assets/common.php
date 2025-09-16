@@ -2,7 +2,7 @@
 function usr_msg()
 {
 
-    if (isset($_SESSION["message"])) { // checks if session variable is empty
+    if (isset($_SESSION)) { // checks if session variable is empty
         if (str_contains($_SESSION["message"], "ERROR") or str_contains($_SESSION["message"], "error")) { // if it contains an error its red
             $msg = "<div id = 'error'> USER MESSAGE: " . $_SESSION["message"] . "</div>";
         } else {
