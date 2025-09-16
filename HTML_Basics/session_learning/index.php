@@ -1,9 +1,11 @@
 <?php // opens php code section
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+require_once "assets/common.php";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+$_SESSION["message"] = $_POST["message"];
 
 }
 echo"<!DOCTYPE html>";
@@ -25,14 +27,13 @@ echo"<div class = 'container'>";
     echo"<h2>Session Work</h2>";
 
     echo"<form method='post' action=''>"; // take user input to store in session and output else where
-    echo"<label for='username'>Username: </label>";
-    echo"<input type = 'text' name = 'username' placeholder = 'Username'>";
+    echo"<label for='username'>Message: </label>";
+    echo"<input type = 'text' name = 'message' placeholder = 'Message'>";
     echo"<br>";
-    echo"<label for='password'>Password: </label>";
-    echo"<input type = 'password' name = 'password' placeholder = 'Password'>";
     echo"<br>";
     echo"<input type = 'submit' name = 'submit' value = 'Submit'>";
     echo"</form>";
+    echo usr_msg();
 
     echo"</div>";
     echo"</div>";
