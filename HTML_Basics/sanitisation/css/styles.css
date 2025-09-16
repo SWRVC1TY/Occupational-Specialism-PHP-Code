@@ -11,30 +11,24 @@ nav ul {
     padding:0; /* removes default padding*/
     display: flex; /* Makes the list horizontal with justify content*/
     justify-content: flex-start; /* */
-    background-color: #4E468C; /* */
+    background-color: white; /* */
 }
 nav li{
     padding: 5px 20px 5px 20px; /* padding for the top right bottle left so links are not to close*/
 }
 nav li:hover{
-    background-color: #EAEDDC;
+    background-color: #4E468C;
 }
 .topbar{
     /* enter top bar styling here*/
 }
 body {
-    background-color: #4E468C;
-}
-#error{
-    background-color: red;
-}
-#none{
-    background-color: green;
+    background-color: #EAEDDC;
 }
 
 .content{
     text-align: center;
     font-size: x-large;
     font-family: Arial Microsoft Himalaya sans-serif;
-    color: black;
+    color: #4E468C;
 }

@@ -5,7 +5,7 @@ require_once "assets/common.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-$_SESSION["message"] = $_POST["message"];
+$_SESSION["message"] = filter_var($_POST["message"], FILTER_SANITIZE_STRING);
 
 }
 echo"<!DOCTYPE html>";
