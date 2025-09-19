@@ -14,7 +14,7 @@ echo"<div class = 'container'>";
     require_once "assets/top_bar.php";
     require_once "assets/nav.php";
 
-    echo"<div class = 'content'";
+    echo"<div class = 'content'>";
 
     //content here
 
