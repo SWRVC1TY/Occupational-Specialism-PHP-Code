@@ -3,7 +3,7 @@
 session_start(); // opens our connection to the session
 require_once "assets/common.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // selection statment to see if any data has been sent to POST
-    $password = $_POST["password"];
+    $password = filter_var($_POST["password"],FILTER_SANITIZE_STRING);
     $rules = password_verification($password);
 }
 echo "<!DOCTYPE html>";
@@ -23,7 +23,6 @@ require_once "assets/nav.php";
 echo "<div class = 'content'>";
 echo"<h2>Please check your password!</h2>";
 echo "<form method='POST' action=''>"; // sends data to post
-    echo"<br>";
     echo"<label id='pass' for='pass'>Password: </label>";
     echo"<input type='password' name='password' id='pass' placeholder='Password' Required>";
     echo"<br>";
@@ -31,7 +30,8 @@ echo "<form method='POST' action=''>"; // sends data to post
 echo"</form>";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    display_rules($rules);
+
+    display_rules($rules, $password);
 
 }
 

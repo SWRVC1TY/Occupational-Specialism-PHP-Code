@@ -30,10 +30,22 @@ nav li:hover{
 body {
     background-color: #3A3B40;
 }
+h2{
+    text-align: center;
+    font-size: x-large;
+    font-family: Arial Microsoft Himalaya sans-serif;
+    color: #00FFFD;
+}
 
 .content{
     text-align: center;
     font-size: x-large;
     font-family: Arial Microsoft Himalaya sans-serif;
-    color: #A5A6AB;
+    color: #D8E2FF;
+}
+#error{
+    background-color: red;
+}
+#none{
+    background-color: green;
 }
