@@ -18,14 +18,20 @@ echo"<h2>Register:</h2>";
 echo"<div class = 'content'>";
 
 echo "<form method='POST' action=''>"; // sends data to post
-echo"<label id='email' for='email'> Email: </label>";
-echo"<input type='email' name='email' id = 'email' placeholder='Email' required>";
-echo"<br>";
 echo"<label id='username' for='username'> Username: </label>";
 echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
 echo"<br>";
 echo"<label id='pass' for='pass'>Password: </label>";
 echo"<input type='password' name='password' id='pass' placeholder='Password' Required>";
+echo"<br>";
+echo"<label id='signup' for='signup'> Signup Date: </label>";
+echo"<input type='date' name='signup' id = 'signup' placeholder='Signup Date' required>";
+echo"<br>";
+echo"<label id='dob' for='dob'> Date of Birth: </label>";
+echo"<input type='date' name='dob' id = 'dob' placeholder='DOB' required>";
+echo"<br>";
+echo"<label id='country' for='country'> Country: </label>";
+echo"<input type='text' name='country' id = 'country' placeholder='Country' required>";
 echo"<br>";
 echo"<input id = submit type='submit' name='submit' value='Submit'>"; // submit button to submit data to post
 echo"</form>";

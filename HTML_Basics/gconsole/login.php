@@ -17,14 +17,12 @@ echo"<h2>Login:</h2>";
 echo"<div class = 'content'>";
 
 echo "<form method='POST' action=''>"; // sends data to post
-echo"<label id='manufacturer' for='username'> Username: </label>";
-echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
-echo"<br>";
 echo"<label id='username' for='username'> Username: </label>";
 echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
 echo"<br>";
-echo"<label id='username' for='username'> Username: </label>";
-echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
+echo"<label id='pass' for='pass'>Password: </label>";
+echo"<input type='password' name='password' id='pass' placeholder='Password' Required>";
+echo"<br>";
 echo"<input id = submit type='submit' name='submit' value='Submit'>"; // submit button to submit data to POST
 echo"</form>";
 
