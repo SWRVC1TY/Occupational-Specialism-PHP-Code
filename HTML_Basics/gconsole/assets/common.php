@@ -27,20 +27,14 @@ function new_console($conn, $POST)
 
 }
 
-function is_user_unique($conn){
+function is_user_unique($conn, $POST){
 
-    $users = [];
-    $user = $_POST["username"];
+    $user = $POST["username"];
     $sql = "SELECT username FROM user WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $user);
     $stmt->execute();
-    $row = "";
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $users[] = $row['username'];
-        echo $row['username'] . "<br>";
-    }
-
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
