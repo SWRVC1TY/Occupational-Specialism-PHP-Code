@@ -1,5 +1,19 @@
 <?php
 session_start(); // opens our connection to the session
+
+require_once "assets/dbconnect.php";
+
+require_once "assets/common.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    try{
+     new_console(dbconnect_insert(), $_POST); // i have called a sub routine and then called another one due to if connection is successful then conn is returned
+        $_SESSION['usermessage'] = "SUCCESS: Console Created!";
+    } catch(PDOException $e){
+        $_SESSION['usermessage'] = $e->getMessage();
+    }
+}
+
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo "<head>";
@@ -16,6 +30,9 @@ require_once "assets/nav.php";
 
 echo"<div class = 'content'>";
 
+echo"<br>";
+echo usr_msg();
+echo"<br>";
 echo "<form method='POST' action=''>"; // sends data to post
 echo"<label id='manufacturer' for='manufacturer'> Manufacturer: </label>";
 echo"<input type='text' name='manufacturer' id = 'manufacturer' placeholder='Manufacturer' required>";

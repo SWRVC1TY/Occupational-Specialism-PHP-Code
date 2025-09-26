@@ -5,11 +5,11 @@ function dbconnect_insert(){
     you would save credentials on a file that is saved outside the servers folder structure
     so only the software can access it!! instead of PDO we can use mysqli but we don't because it is slowing being push out
     and is no longer accepted as good practice. PDO will connect to any type of data source with 1 command set, so if we migrated database systems
-    we would need to change 1 line of code and we can establish a new connection*/
+    we would need to change 1 line of code and we can establish a new connection. we dont use root as if some one get acsess to the file people have fulle accsess to the server*/
 
     $servername = "localhost"; // sets server name
-    $dbusername = "gconsoleinsert"; // name of the user
-    $dbpassword = "password1G";// users password
+    $dbusername = "root"; // name of the user
+    $dbpassword = "";// users password
     $dbname = "gconsole"; // database name
 
     try{ // trying code and catching errors

@@ -20,7 +20,13 @@ echo"<h2>Welcome to gaming hub's console tracker!</h2>";
 echo"<div class = 'content'>";
 
 echo"<p>This is my website.......<br>Insert content here...</p>";
-
+try {
+    $conn = dbconnect_insert();
+    echo"success";
+}
+catch (PDOException $e) {
+    echo $e->getMessage();
+}
 
 echo"</div>";
 echo"</div>";
