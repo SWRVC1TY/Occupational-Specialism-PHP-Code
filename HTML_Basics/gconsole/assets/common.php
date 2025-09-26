@@ -22,7 +22,7 @@ function new_console($conn, $post)
         error_log("Audit Database error: " . $e->getMessage());
     } catch (Execption $e) {
         error_log("Auding error: " . $e->getMessage());
-        throw new Exception("Auditing error:  " . $e->getMessage());
+        throw new Exception("Auditing error: " . $e->getMessage());
     }
 
 }
