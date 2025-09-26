@@ -1,5 +1,5 @@
 <?php # stores reuseable code for all pages
-function new_console($conn, $post)
+function new_console($conn, $POST)
 {
     try {
         /*we are preparing the statement to send of to the database to help prevent sql injection attacks*/
@@ -9,11 +9,11 @@ function new_console($conn, $post)
         // bind parameters for security
         // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
         // which makes it less likely for someone to hijack the sql statement
-        $stmt->bindParam(1, $post['manufacturer']);
-        $stmt->bindParam(2, $post['console_name']);
-        $stmt->bindParam(3, $post['release_date']);
-        $stmt->bindParam(4, $post['controllerno']);
-        $stmt->bindParam(5, $post['bit']);
+        $stmt->bindParam(1, $POST['manufacturer']);
+        $stmt->bindParam(2, $POST['console_name']);
+        $stmt->bindParam(3, $POST['release_date']);
+        $stmt->bindParam(4, $POST['controllerno']);
+        $stmt->bindParam(5, $POST['bit']);
 
         $stmt->execute(); // sends of data
         $conn = null; // closes connection
@@ -26,6 +26,27 @@ function new_console($conn, $post)
     }
 
 }
+
+function is_user_unique($conn){
+
+    $users = [];
+    $user = $_POST["username"];
+    $sql = "SELECT username FROM user WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $user);
+    $stmt->execute();
+    $row = "";
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $users[] = $row['username'];
+        echo $row['username'] . "<br>";
+    }
+
+
+
+
+
+}
+
 
 function usr_msg() {
 
