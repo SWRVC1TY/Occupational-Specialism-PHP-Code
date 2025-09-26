@@ -12,7 +12,7 @@ function new_console($conn, $post)
         $stmt->bindParam(1, $post['manufacturer']);
         $stmt->bindParam(2, $post['console_name']);
         $stmt->bindParam(3, $post['release_date']);
-        $stmt->bindParam(4, $post['controller_no']);
+        $stmt->bindParam(4, $post['controllerno']);
         $stmt->bindParam(5, $post['bit']);
 
         $stmt->execute(); // sends of data
@@ -27,10 +27,9 @@ function new_console($conn, $post)
 
 }
 
-function usr_msg()
-{
+function usr_msg() {
 
-    if (isset($_SESSION)) { // checks if session variable is empty
+    if (isset($_SESSION["usermessage"])) { // checks if session variable is empty
         if (str_contains($_SESSION["usermessage"], "ERROR") or str_contains($_SESSION["usermessage"], "error")) { // if it contains an error its red
             $msg = "<div id = 'error'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>";
         } else {
@@ -38,7 +37,7 @@ function usr_msg()
         }
 
         $_SESSION[$msg] = ""; // wipes session var
-        unset($_SESSION["message"]);// unsets session var
+        unset($_SESSION["usermessage"]);// unsets session var
         return $msg;
     } else {
         return "";

@@ -7,7 +7,7 @@ require_once "assets/common.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     try{
-     new_console(dbconnect_insert(), $_POST); // i have called a sub routine and then called another one due to if connection is successful then conn is returned
+        new_console(dbconnect_insert(), $_POST); // i have called a sub routine and then called another one due to if connection is successful then conn is returned
         $_SESSION['usermessage'] = "SUCCESS: Console Created!";
     } catch(PDOException $e){
         $_SESSION['usermessage'] = $e->getMessage();
