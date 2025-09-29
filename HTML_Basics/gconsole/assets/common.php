@@ -44,7 +44,8 @@ function is_user_unique($conn, $POST)
 }
 
 
-function create_new($conn, $POST){
+function create_new($conn, $POST)
+{
 
     try {
         /*we are preparing the statement to send of to the database to help prevent sql injection attacks*/
@@ -61,31 +62,34 @@ function create_new($conn, $POST){
         $stmt->bindParam(5, $POST['country']);
 
         $stmt->execute(); // sends of data
-        $conn = null; // closes connection
+        $conn = null;//closes the connection so it can't be abused by packet sniffers
         return true;
     } catch (PDOException $e) {
-        error_log("Audit Database error: " . $e->getMessage());
-    } catch (Execption $e) {
-        error_log("Auding error: " . $e->getMessage());
-        throw new Exception("Auditing error: " . $e->getMessage());
+        //handle database errors
+        error_log("User reg database error: " . $e->getMessage());
+        throw new PDOException("User reg database error" . $e);
+    } catch (Exception $e) {
+        //catch any other errors
+        error_log("User registration error: " . $e->getMessage());
+        throw new Exception("User registration error" . $e);
     }
-}
 
-function usr_msg()
-{
+    function usr_msg()
+    {
 
-    if (isset($_SESSION["usermessage"])) { // checks if session variable is empty
-        if (str_contains($_SESSION["usermessage"], "ERROR") or str_contains($_SESSION["usermessage"], "error")) { // if it contains an error its red
-            $msg = "<div id = 'error'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>";
+        if (isset($_SESSION["usermessage"])) { // checks if session variable is empty
+            if (str_contains($_SESSION["usermessage"], "ERROR") or str_contains($_SESSION["usermessage"], "error")) { // if it contains an error its red
+                $msg = "<div id = 'error'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>";
+            } else {
+                $msg = "<div id = 'none'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>"; // if not its green
+            }
+
+            $_SESSION[$msg] = ""; // wipes session var
+            unset($_SESSION["usermessage"]);// unsets session var
+            return $msg;
         } else {
-            $msg = "<div id = 'none'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>"; // if not its green
+            return "";
         }
 
-        $_SESSION[$msg] = ""; // wipes session var
-        unset($_SESSION["usermessage"]);// unsets session var
-        return $msg;
-    } else {
-        return "";
     }
-
 }

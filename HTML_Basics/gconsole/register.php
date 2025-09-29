@@ -1,5 +1,8 @@
 <?php
 session_start(); // opens our connection to the session
+require_once "assets/dbconnect.php";
+
+require_once "assets/common.php";
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo "<head>";
@@ -34,10 +37,10 @@ echo"<label id='pass' for='pass'>Password: </label>";
 echo"<input type='password' name='password' id='pass' placeholder='Password' Required>";
 echo"<br>";
 echo"<label id='signup' for='signup'> Signup Date: </label>";
-echo"<input type='date' name='signup' id = 'signup' placeholder='Signup Date' required>";
+echo"<input type='text' name='signup' id = 'signup' placeholder='Signup Date' required>";
 echo"<br>";
 echo"<label id='dob' for='dob'> Date of Birth: </label>";
-echo"<input type='date' name='dob' id = 'dob' placeholder='DOB' required>";
+echo"<input type='text' name='dob' id = 'dob' placeholder='DOB' required>";
 echo"<br>";
 echo"<label id='country' for='country'> Country: </label>";
 echo"<input type='text' name='country' id = 'country' placeholder='Country' required>";
