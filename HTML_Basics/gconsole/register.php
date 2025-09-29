@@ -17,6 +17,15 @@ require_once "assets/nav.php";
 echo"<h2>Register:</h2>";
 echo"<div class = 'content'>";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
+
+    if (is_user_unique(dbconnect_insert(), $_POST)){
+        echo"Username ".$_POST['username']."already taken.";
+    } else {
+        create_new(dbconnect_insert(), $_POST);
+    }
+}
+
 echo "<form method='POST' action=''>"; // sends data to post
 echo"<label id='username' for='username'> Username: </label>";
 echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
