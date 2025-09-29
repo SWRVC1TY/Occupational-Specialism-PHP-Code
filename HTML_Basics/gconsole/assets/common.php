@@ -27,7 +27,8 @@ function new_console($conn, $POST)
 
 }
 
-function is_user_unique($conn, $POST){
+function is_user_unique($conn, $POST)
+{
 
     $user = $POST["username"];
     $sql = "SELECT username FROM user WHERE username = ?";
@@ -35,14 +36,16 @@ function is_user_unique($conn, $POST){
     $stmt->bindParam(1, $user);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-
+    if ($result) { // if the user name exists then return true
+        return true;
+    } else { // if not return false
+        return false;
+    }
 }
 
 
-function usr_msg() {
+function usr_msg()
+{
 
     if (isset($_SESSION["usermessage"])) { // checks if session variable is empty
         if (str_contains($_SESSION["usermessage"], "ERROR") or str_contains($_SESSION["usermessage"], "error")) { // if it contains an error its red

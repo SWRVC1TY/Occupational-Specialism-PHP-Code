@@ -29,7 +29,7 @@ require_once "assets/top_bar.php";
 require_once "assets/nav.php";
 
 echo"<div class = 'content'>";
-    is_user_unique(dbconnect_insert());
+
 echo"<br>";
 echo usr_msg();
 echo"<br>";

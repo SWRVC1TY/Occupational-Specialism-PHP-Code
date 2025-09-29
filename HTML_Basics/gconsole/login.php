@@ -1,5 +1,8 @@
 <?php
 session_start(); // opens our connection to the session
+require_once "assets/dbconnect.php";
+
+require_once "assets/common.php";
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo "<head>";
@@ -15,7 +18,15 @@ require_once "assets/top_bar.php";
 require_once "assets/nav.php";
 echo"<h2>Login:</h2>";
 echo"<div class = 'content'>";
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
+    if (is_user_unique(dbconnect_insert(), $_POST)){
+        echo"Username ".$_POST['username']."already taken.";
+    } else {
+        echo"Username ".$_POST['username']."is free";
+    }
+
+}
 echo "<form method='POST' action=''>"; // sends data to post
 echo"<label id='username' for='username'> Username: </label>";
 echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
@@ -25,6 +36,7 @@ echo"<input type='password' name='password' id='pass' placeholder='Password' Req
 echo"<br>";
 echo"<input id = submit type='submit' name='submit' value='Submit'>"; // submit button to submit data to POST
 echo"</form>";
+
 
 echo"</div>";
 echo"</div>";

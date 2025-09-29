@@ -1,6 +1,7 @@
 <?php
 
-function dbconnect_insert(){
+function dbconnect_insert(): PDO
+{
     /*this is an awful way as these are stored in plain text in the code base,very insecure.
     you would save credentials on a file that is saved outside the servers folder structure
     so only the software can access it!! instead of PDO we can use mysqli but we don't because it is slowing being push out
