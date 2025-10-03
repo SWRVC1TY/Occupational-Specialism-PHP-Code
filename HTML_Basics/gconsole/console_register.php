@@ -30,9 +30,7 @@ require_once "assets/nav.php";
 
 echo"<div class = 'content'>";
 
-echo"<br>";
-echo usr_msg();
-echo"<br>";
+echo"<h2>Please register your console here!</h2>";
 echo "<form method='POST' action=''>"; // sends data to post
 echo"<label id='manufacturer' for='manufacturer'> Manufacturer: </label>";
 echo"<input type='text' name='manufacturer' id = 'manufacturer' placeholder='Manufacturer' required>";
