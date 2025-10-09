@@ -30,10 +30,9 @@ function new_console($conn, $POST)
 function is_user_unique($conn, $POST)
 {
 
-    $user = $POST["username"];
     $sql = "SELECT username FROM user WHERE username = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $user);
+    $stmt->bindParam(1, $POST);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) { // if the user name exists then return true
@@ -56,7 +55,9 @@ function create_new($conn, $POST)
         // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
         // which makes it less likely for someone to hijack the sql statement
         $stmt->bindParam(1, $POST['username']);
-        $stmt->bindParam(2, $POST['password']);
+        // Hash the password
+        $hpswd = password_hash($POST['password'], PASSWORD_DEFAULT);  //has the password
+        $stmt->bindParam(2, $hpswd);
         $stmt->bindParam(3, $POST['signup']);
         $stmt->bindParam(4, $POST['dob']);
         $stmt->bindParam(5, $POST['country']);
@@ -91,4 +92,50 @@ function usr_msg()
         return "";
     }
 
+}
+
+function audit($conn, $userid, $code,$long){
+    $sql = "INSERT INTO audit(code,date,longdesc,user_id) VALUES(?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $date = date("Y-m-d"); // this is the only structure that is accepted
+    $stmt->bindParam(1, $code);
+    $stmt->bindParam(2, $date);
+    $stmt->bindParam(3, $long);
+    $stmt->bindParam(4, $userid);
+
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
+function login($conn, $usrname){
+    try {  //try this code, catch errors
+        $sql = "SELECT user_id, password FROM user WHERE username = ?"; //set up the sql statement
+        $stmt = $conn->prepare($sql); //prepares
+        $stmt->bindParam(1,$usrname);  //binds the parameters to execute
+        $stmt->execute(); //run the sql code
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+        $conn = null;  // nulls off the connection so cant be abused.
+
+        if($result){  // if there is a result returned
+            return $result;
+
+        } else {
+            $_SESSION['usermessage'] = "User not found";
+            header("Location: login.php");
+            exit; // Stop further execution
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = "User login".$e->getMessage();
+        header("Location: login.php");
+        exit; // Stop further execution
+    }
+}
+function getnewuserid($conn, $email){  # upon registering, retrieves the userid from the system to audit.
+    $sql = "SELECT user_id FROM user WHERE username = ?"; //set up the sql statement
+    $stmt = $conn->prepare($sql); //prepares
+    $stmt->bindParam(1, $email);
+    $stmt->execute(); //run the sql code
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+    return $result["user_id"];
 }

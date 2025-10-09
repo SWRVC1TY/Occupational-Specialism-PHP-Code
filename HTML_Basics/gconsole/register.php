@@ -20,13 +20,23 @@ require_once "assets/nav.php";
 echo"<h2>Register:</h2>";
 echo"<div class = 'content'>";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST"){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    if (is_user_unique(dbconnect_insert(), $_POST)){
-        echo"Username ".$_POST['username']."already taken.";
+    if(!is_user_unique(dbconnect_insert(), $_POST["username"])){
+
+        if(create_new(dbconnect_insert(),$_POST)) {
+            audit(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['username']), "reg","New user registered");
+            $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+            header("Location: login.php");
+            exit;
+
+        } else {
+            $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
+        }
     } else {
-        create_new(dbconnect_insert(), $_POST);
+        $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
     }
+    echo usr_msg();
 }
 
 echo "<form method='POST' action=''>"; // sends data to post
