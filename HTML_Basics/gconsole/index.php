@@ -1,5 +1,10 @@
 <?php
-session_start(); // opens our connection to the session
+if (!isset($_GET['message'])) {
+    session_start();
+    $message = false;
+}else{
+    $message = htmlspecialchars($_GET['message']);
+} // opens our connection to the session
 require_once "assets/dbconnect.php";
 echo"<!DOCTYPE html>";
 echo"<html>";

@@ -1,5 +1,10 @@
 <?php // opens php code section
-session_start(); // opens our connection to the session
+if (!isset($_GET['message'])) {
+    session_start();
+    $message = false;
+}else{
+    $message = htmlspecialchars($_GET['message']);
+} // opens our connection to the session
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo "<head>";

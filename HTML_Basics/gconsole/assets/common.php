@@ -73,23 +73,22 @@ function create_new($conn, $POST)
         error_log("User registration error: " . $e->getMessage());
         throw new Exception("User registration error" . $e);
     }
+}
+function usr_msg()
+{
 
-    function usr_msg()
-    {
-
-        if (isset($_SESSION["usermessage"])) { // checks if session variable is empty
-            if (str_contains($_SESSION["usermessage"], "ERROR") or str_contains($_SESSION["usermessage"], "error")) { // if it contains an error its red
-                $msg = "<div id = 'error'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>";
-            } else {
-                $msg = "<div id = 'none'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>"; // if not its green
-            }
-
-            $_SESSION[$msg] = ""; // wipes session var
-            unset($_SESSION["usermessage"]);// unsets session var
-            return $msg;
+    if (isset($_SESSION["usermessage"])) { // checks if session variable is empty
+        if (str_contains($_SESSION["usermessage"], "ERROR") or str_contains($_SESSION["usermessage"], "error")) { // if it contains an error its red
+            $msg = "<div id = 'error'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>";
         } else {
-            return "";
+            $msg = "<div id = 'none'> USER MESSAGE: " . $_SESSION["usermessage"] . "</div>"; // if not its green
         }
 
+        $_SESSION[$msg] = ""; // wipes session var
+        unset($_SESSION["usermessage"]);// unsets session var
+        return $msg;
+    } else {
+        return "";
     }
+
 }

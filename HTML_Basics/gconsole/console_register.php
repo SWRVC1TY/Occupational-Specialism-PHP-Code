@@ -5,6 +5,12 @@ require_once "assets/dbconnect.php";
 
 require_once "assets/common.php";
 
+if(!isset($_SESSION["user"])){
+    $_SESSION["usermessage"] = "ERROR: You need to be logged in.";
+    header("Location: login.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     try{
         new_console(dbconnect_insert(), $_POST); // i have called a sub routine and then called another one due to if connection is successful then conn is returned
