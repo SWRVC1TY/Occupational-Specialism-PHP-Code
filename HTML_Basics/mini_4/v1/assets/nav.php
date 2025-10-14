@@ -6,9 +6,16 @@ echo "<ul>";
 
 // Navigation Buttons (each in a table cell)
 echo "<li><a href='index.php'>Home</a></li>";   // Link to View Bookings page
-echo "<li><a href='page1.php'>Page1</a></li>";  // Link to page 1
-echo "<li><a href='page2.php'>Page2</a></li>";  // Link to page 2
-echo "<li><a href='page3.php'>Page3</a></li>";  // Link to page 3
+
+if (!isset($_SESSION['user'])){
+    echo "<li><a href='login.php'>Login</a></li>";  // Link to page 1
+    echo "<li><a href='register.php'>Register</a></li>";  // Link to page 2
+}
+else { // used if statement to show pages on log in status to remove attack vectors
+    echo "<li><a href='bookin.php'>Console Register</a></li>";  // Link to page 2
+    echo "<li><a href='bookins.php'>Console Register</a></li>";  // Link to page 2
+    echo "<li><a href='logout.php'>Logout</a></li>";
+}
 echo "</ul>";
 
 echo"<nav>";

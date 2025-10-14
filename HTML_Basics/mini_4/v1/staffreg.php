@@ -49,11 +49,14 @@ echo"<br>";
 echo"<label id='email' for='email'> Email: </label>";
 echo"<input type='email' name='email' id = 'email' placeholder='Email' required>";
 echo"<br>";
-echo"<label id='dob' for='dob'> Date of Birth: </label>";
-echo"<input type='text' name='dob' id = 'dob' placeholder='DOB' required>";
+echo"<label id='doc' for='doc'>Doctor</label>";
+echo"<input type='radio' name='role' id = 'doc' value='doctor'>";
 echo"<br>";
-echo"<label id='country' for='country'>  : </label>";
-echo"<input type='text' name='country' id = 'country' placeholder='Country' required>";
+echo"<label id='nur' for='nur'>Nurse</label>";
+echo"<input type='radio' name='role' id = 'nur' value='nurse'>";
+echo"<br>";
+echo"<label id='adm' for='adm'>Admin</label>";
+echo"<input type='radio' name='role' id = 'adm' value='Admin'>";
 echo"<br>";
 echo"<input id = submit type='submit' name='submit' value='Submit'>"; // submit button to submit data to post
 echo"</form>";
