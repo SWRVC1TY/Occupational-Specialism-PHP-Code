@@ -139,3 +139,13 @@ function getnewuserid($conn, $email){  # upon registering, retrieves the userid 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
     return $result["user_id"];
 }
+function staff_getter($conn){
+    $sql = "SELECT staff_id, role, fname, sname, room WHERE role != ? ORDER BY role DESC";
+    $stmt = $conn->prepare($sql);
+    $exclude_role = "adm";
+    $stmt->bindParam(1, $exclude_role);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
+}
