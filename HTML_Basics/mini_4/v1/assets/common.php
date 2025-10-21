@@ -30,7 +30,7 @@ function new_console($conn, $POST)
 function is_user_unique($conn, $POST)
 {
 
-    $sql = "SELECT username FROM user WHERE username = ?";
+    $sql = "SELECT username FROM patient WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $POST);
     $stmt->execute();
@@ -48,7 +48,7 @@ function create_new($conn, $POST)
 
     try {
         /*we are preparing the statement to send of to the database to help prevent sql injection attacks*/
-        $sql = "INSERT INTO patient(username,first_name, second_name, dob, password) VALUES(?, ?, ?, ?)";
+        $sql = "INSERT INTO patient(username,first_name, second_name, dob, password) VALUES(?, ?, ?, ?,?)";
         $stmt = $conn->prepare($sql);
 
         // bind parameters for security
@@ -59,8 +59,8 @@ function create_new($conn, $POST)
         $stmt->bindParam(3, $POST['sname']);
         // Hash the password
         $hpswd = password_hash($POST['password'], PASSWORD_DEFAULT);  //has the password
-        $stmt->bindParam(4, $hpswd);
-        $stmt->bindParam(5, $POST['dob']);
+        $stmt->bindParam(4, $POST['dob']);
+        $stmt->bindParam(5, $hpswd);
 
         $stmt->execute(); // sends of data
         $conn = null;//closes the connection so it can't be abused by packet sniffers
@@ -157,7 +157,8 @@ function commit_booking($conn, $epoch){
     // Hash the password
     $stmt->bindParam(2, $_POST['staff']);
     $stmt->bindParam(3, $epoch);
-    $stmt->bindParam(4, time());
+    $tmp = time();
+    $stmt->bindParam(4, $tmp);
 
     $stmt->execute();  //run the query to insert
     $conn = null;  // closes the connection so cant be abused.

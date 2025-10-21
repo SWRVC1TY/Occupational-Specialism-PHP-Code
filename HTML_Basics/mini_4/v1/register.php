@@ -27,18 +27,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     header("Location: login.php");
     exit;
 
+    } elseif(!is_user_unique(dbconnect_insert(),$_POST['username'])) {
+        $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
     } else {
         $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
     }
-    } else {
-        $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
-    }
-    echo usr_msg();
 }
 
 echo "<form method='POST' action=''>"; // sends data to post
-echo"<label id='username' for='username'> Username: </label>";
-echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
+echo"<label for='username'> Username: </label>";
+echo"<input type='text' name='username' placeholder='Username' required>";
 echo"<br>";
 echo"<label id='fname' for='fname'> Username: </label>";
 echo"<input type='text' name='fname' id = 'frname' placeholder='First Name' required>";
