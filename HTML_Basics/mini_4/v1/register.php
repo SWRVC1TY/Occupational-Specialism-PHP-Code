@@ -21,18 +21,15 @@ echo"<h2>Register:</h2>";
 echo"<div class = 'content'>";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if(create_new(dbconnect_insert(),$_POST)) {
+    audit(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['userid']), "reg","New user registered");
+    $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+    header("Location: login.php");
+    exit;
 
-    if(!is_user_unique(dbconnect_insert(), $_POST["username"])){
-
-        if(create_new(dbconnect_insert(),$_POST)) {
-            audit(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['username']), "reg","New user registered");
-            $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
-            header("Location: login.php");
-            exit;
-
-        } else {
-            $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
-        }
+    } else {
+        $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
+    }
     } else {
         $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
     }
@@ -40,6 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 echo "<form method='POST' action=''>"; // sends data to post
+echo"<label id='username' for='username'> Username: </label>";
+echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
+echo"<br>";
 echo"<label id='fname' for='fname'> Username: </label>";
 echo"<input type='text' name='fname' id = 'frname' placeholder='First Name' required>";
 echo"<br>";

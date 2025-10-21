@@ -2,10 +2,29 @@
 require_once "assets/dbconnect.php";
 require_once "assets/common.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// this needs to load before anything else so it will actualy load rarther than crash due to if headers are in here and
+// this is not before html code the headers will be loaded and the errors will get thrown
 
-    $tmp = $_POST["appt_date"]." ".$_POST["appt_time"];
-    $epoch = strtotime($tmp); // pre assining to a variable to help reduce the risk of errors (this is the best practice)
-    echo $epoch;
+    try {
+
+
+        $tmp = $_POST["appt_date"] . " " . $_POST["appt_time"];
+        $epoch = strtotime($tmp); // pre assining to a variable to help reduce the risk of errors (this is the best practice)
+        if(commit_booking(dbconnect_insert(),$epoch)){
+            $_SESSION['usermessage'] = "SUCESS: Your booking has been confirmed";
+            header("location: bookings.php");
+            exit;
+        } else {
+            $_SESSION['usermessage'] = "ERROR: Your booking has not been confirmed";
+        }
+
+    } catch (PDOException $e) {
+        $_SESSION['usermessage'] = $e->getMessage();
+    } catch (Exception $e) {
+        $_SESSION['usermessage'] = $e->getMessage();
+    }
+
+
 }
 if (!isset($_GET['message'])) {
     session_start();
