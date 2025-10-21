@@ -48,13 +48,13 @@ function create_new($conn, $POST)
 
     try {
         /*we are preparing the statement to send of to the database to help prevent sql injection attacks*/
-        $sql = "INSERT INTO user(username, password, signupdate, dob, country) VALUES(?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO user(first_name, second_name, dob, password) VALUES(?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         // bind parameters for security
         // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
         // which makes it less likely for someone to hijack the sql statement
-        $stmt->bindParam(1, $POST['username']);
+        $stmt->bindParam(1, $POST['fname']);
         // Hash the password
         $hpswd = password_hash($POST['password'], PASSWORD_DEFAULT);  //has the password
         $stmt->bindParam(2, $hpswd);

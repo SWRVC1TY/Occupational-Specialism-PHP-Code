@@ -1,4 +1,7 @@
 <?php // opens php code section
+require_once "assets/dbconnect.php";
+require_once "assets/common.php";
+
 if (!isset($_GET['message'])) {
     session_start();
     $message = false;

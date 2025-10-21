@@ -40,14 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 echo "<form method='POST' action=''>"; // sends data to post
-echo"<label id='username' for='username'> Username: </label>";
-echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
+echo"<label id='fname' for='fname'> Frist Name: </label>";
+echo"<input type='text' name='fname' id = 'fname' placeholder='fname' required>";
+echo"<br>";
+echo"<label id='sname' for='sname'> Surname: </label>";
+echo"<input type='sname' name='sname' id = 'sname' placeholder='Surname' required>";
 echo"<br>";
 echo"<label id='pass' for='pass'>Password: </label>";
 echo"<input type='password' name='password' id='pass' placeholder='Password' Required>";
-echo"<br>";
-echo"<label id='email' for='email'> Email: </label>";
-echo"<input type='email' name='email' id = 'email' placeholder='Email' required>";
 echo"<br>";
 echo"<label id='doc' for='doc'>Doctor</label>";
 echo"<input type='radio' name='role' id = 'doc' value='doctor'>";

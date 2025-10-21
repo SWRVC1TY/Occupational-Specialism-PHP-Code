@@ -40,20 +40,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 echo "<form method='POST' action=''>"; // sends data to post
-echo"<label id='username' for='username'> Username: </label>";
-echo"<input type='text' name='username' id = 'username' placeholder='Username' required>";
+echo"<label id='fname' for='fname'> Username: </label>";
+echo"<input type='text' name='fname' id = 'frname' placeholder='First Name' required>";
 echo"<br>";
-echo"<label id='pass' for='pass'>Password: </label>";
-echo"<input type='password' name='password' id='pass' placeholder='Password' Required>";
-echo"<br>";
-echo"<label id='email' for='email'> Email: </label>";
-echo"<input type='email' name='email' id = 'email' placeholder='Email' required>";
+echo"<label id='sname' for='sname'> Surname: </label>";
+echo"<input type='text' name='sname' id = 'sname' placeholder='sname' required>";
 echo"<br>";
 echo"<label id='dob' for='dob'> Date of Birth: </label>";
 echo"<input type='text' name='dob' id = 'dob' placeholder='DOB' required>";
 echo"<br>";
-echo"<label id='country' for='country'>  : </label>";
-echo"<input type='text' name='country' id = 'country' placeholder='Country' required>";
+echo"<label id='pass' for='pass'>Password: </label>";
+echo"<input type='password' name='password' id='pass' placeholder='Password' Required>";
 echo"<br>";
 echo"<input id = submit type='submit' name='submit' value='Submit'>"; // submit button to submit data to post
 echo"</form>";

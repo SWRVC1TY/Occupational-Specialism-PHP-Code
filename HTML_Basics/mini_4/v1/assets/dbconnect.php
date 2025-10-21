@@ -8,9 +8,9 @@ function dbconnect_insert(){
     we would need to change 1 line of code and we can establish a new connection*/
 
     $servername = "localhost"; // sets server name
-    $dbusername = "gconsoleinsert"; // name of the user
-    $dbpassword = "password1G";// users password
-    $dbname = "gconsole"; // database name
+    $dbusername = "root"; // name of the user
+    $dbpassword = "";// users password
+    $dbname = "primary_oaks"; // database name
 
     try{ // trying code and catching errors
         $conn = new PDO("mysql:host=$servername;port=3306;dbname=$dbname", $dbusername, $dbpassword);
