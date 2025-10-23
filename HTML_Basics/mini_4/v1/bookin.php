@@ -1,18 +1,20 @@
 <?php // opens php code section
+
+session_start();
+
 require_once "assets/dbconnect.php";
 require_once "assets/common.php";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // this needs to load before anything else so it will actualy load rarther than crash due to if headers are in here and
 // this is not before html code the headers will be loaded and the errors will get thrown
 
     try {
-
-
         $tmp = $_POST["appt_date"] . " " . $_POST["appt_time"];
         $epoch = strtotime($tmp); // pre assining to a variable to help reduce the risk of errors (this is the best practice)
         if(commit_booking(dbconnect_insert(),$epoch)){
             $_SESSION['usermessage'] = "SUCESS: Your booking has been confirmed";
-            header("location: bookings.php");
+            header("location: bookins.php");
             exit;
         } else {
             $_SESSION['usermessage'] = "ERROR: Your booking has not been confirmed";
@@ -26,12 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 }
-if (!isset($_GET['message'])) {
-    session_start();
-    $message = false;
-}else{
-    $message = htmlspecialchars($_GET['message']);
-} // opens our connection to the session
+
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo "<head>";
@@ -47,16 +44,19 @@ require_once "assets/top_bar.php";
 require_once "assets/nav.php";
 
 echo"<div class = 'content'>";
+echo usr_msg();
 
-echo"<form method = 'POST' action = ''>";
+echo"<form action='' method='post' >";
 
 $staff = staff_getter(dbconnect_insert());
 
 echo"<label for='appt_time'> Appointment Time: </label>";
-echo"<input type = 'time' name = 'appt_time' required>";
+echo"<input type = 'time' name ='appt_time' required>";
+
+echo"<br>";
 
 echo"<label for='appt_date'> Appointment date: </label>";
-echo"<input type = 'date' name = 'appt_date' required>";
+echo"<input type = 'date' name ='appt_date' required>";
 
 echo"<br>";
 
@@ -65,13 +65,16 @@ echo"<select name='staff'>";
 foreach ($staff as $staf){
 
     if ($staf['role'] == 'doc'){
-        $role = "doc";
+        $role = "Doctor:";
     }
     else if ($staf['role'] == 'nur'){
-        $role = "nurse";
+        $role = "Nurse:";
     }
-    echo"<option value='".$staf['staff_id']."'>".$role."".$staf['sname']."".$staf['fname']."Room".$staf['room']."</option>";
+    echo"<option value='".$staf['staffid']."'>".$role." ".$staf['sname']." ".$staf['fname']." "."Room ".$staf['room']."</option>";
+
 }
+echo"<input type='submit' name='submit' value='Submit'>";
+echo"</form>";
 
 echo"</div>";
 echo"</div>";

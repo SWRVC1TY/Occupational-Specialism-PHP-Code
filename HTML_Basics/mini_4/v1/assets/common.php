@@ -1,31 +1,4 @@
 <?php # stores reuseable code for all pages
-function new_console($conn, $POST)
-{
-    try {
-        /*we are preparing the statement to send of to the database to help prevent sql injection attacks*/
-        $sql = "INSERT INTO console(manufacturer, console_name, release_date, controller_no, bit) VALUES(?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-
-        // bind parameters for security
-        // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
-        // which makes it less likely for someone to hijack the sql statement
-        $stmt->bindParam(1, $POST['manufacturer']);
-        $stmt->bindParam(2, $POST['console_name']);
-        $stmt->bindParam(3, $POST['release_date']);
-        $stmt->bindParam(4, $POST['controllerno']);
-        $stmt->bindParam(5, $POST['bit']);
-
-        $stmt->execute(); // sends of data
-        $conn = null; // closes connection
-        return true;
-    } catch (PDOException $e) {
-        error_log("Audit Database error: " . $e->getMessage());
-    } catch (Execption $e) {
-        error_log("Auding error: " . $e->getMessage());
-        throw new Exception("Auditing error: " . $e->getMessage());
-    }
-
-}
 
 function is_user_unique($conn, $POST)
 {
@@ -140,7 +113,7 @@ function getnewuserid($conn, $username){  # upon registering, retrieves the user
     return $result['patientid'];
 }
 function staff_getter($conn){
-    $sql = "SELECT staff_id, role, fname, sname, room WHERE role != ? ORDER BY role DESC";
+    $sql = "SELECT staffid, fname, sname, role, room FROM STAFF WHERE role != ? ORDER BY role DESC";
     $stmt = $conn->prepare($sql);
     $exclude_role = "adm";
     $stmt->bindParam(1, $exclude_role);
@@ -150,15 +123,14 @@ function staff_getter($conn){
     return $result;
 }
 function commit_booking($conn, $epoch){
-    $sql = "INSERT INTO user () VALUES ()";  //prepare the sql to be sent
+    $sql = "INSERT INTO bookings (patientid,staffid,dateofbooking,appointmentdate) VALUES (?,?,?,?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
 
-    $stmt->bindParam(1, $_POST['userid']);  //bind parameters for security
-    // Hash the password
+    $stmt->bindParam(1, $_SESSION['userid']);  //bind parameters for security
     $stmt->bindParam(2, $_POST['staff']);
-    $stmt->bindParam(3, $epoch);
     $tmp = time();
-    $stmt->bindParam(4, $tmp);
+    $stmt->bindParam(3, $tmp);
+    $stmt->bindParam(4, $epoch);
 
     $stmt->execute();  //run the query to insert
     $conn = null;  // closes the connection so cant be abused.
@@ -169,7 +141,7 @@ function appt_getter($conn){
     so b would be bookings and s is the staff table we use bookings b to be able to use b as a referance same as staff s
     on is telling where to do the join*/
     $sql = "SELECT b.bookingid, b.patientid, b.appointmentdate, b.dateofbooking, s.role, s.fname, s.sname, s.room FROM bookings b JOIN staff s on 
-    b.staffid = s.staffid WHERE b.patientid = ? ORDER BY b.appointmentdate DESC";
+    b.staffid = s.staffid WHERE b.patientid = ? ORDER BY b.appointmentdate ASC";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $_SESSION['userid']);
     $stmt->execute();
@@ -181,4 +153,34 @@ function appt_getter($conn){
         return false;
     }
 
+}
+
+function cancel_appt($conn, $aptid){
+    $sql = "DELETE FROM bookings WHERE bookingid = ?"; // sql statment to delete the booking
+    $stmt = $conn->prepare($sql); // preparing the statment for execution
+    $stmt->bindParam(1, $aptid);// binding parameters for security
+    $stmt->execute();// executes the statment
+    $conn = null; // closes the connection to the database
+    return true; // confirms that the sql has happened
+}
+
+function appt_fetch($conn, $bookingid){
+    $sql = "SELECT * FROM bookings WHERE bookingid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $bookingid);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
+}
+
+function appt_update($conn, $bookingid, $appttime){
+    $sql = "UPDATE bookings SET staffid = ?, appointmentdate = ? WHERE bookingid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_POST['staff']);
+    $stmt->bindParam(2, $appttime);
+    $stmt->bindParam(3, $bookingid);
+    $stmt->execute();
+    $conn = null;
+    return true;
 }
