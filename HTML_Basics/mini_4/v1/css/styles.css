@@ -15,6 +15,12 @@ nav ul {
 }
 nav li{
     padding: 5px 20px 5px 20px; /* padding for the top right bottle left so links are not to close*/
+    background-color: pink;
+    font-size: 20px;
+    font-weight: bold;
+}
+nav li a{
+    text-decoration: none;
 }
 nav li:hover{
     background-color: #4E468C;

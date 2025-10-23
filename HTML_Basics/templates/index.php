@@ -1,13 +1,10 @@
 <?php // opens php code section
+session_start();
 require_once "assets/dbconnect.php";
 require_once "assets/common.php";
 
-if (!isset($_GET['message'])) {
-    session_start();
-    $message = false;
-}else{
-    $message = htmlspecialchars($_GET['message']);
-} // opens our connection to the session
+
+ // opens our connection to the session
 echo"<!DOCTYPE html>";
 echo"<html>";
 echo "<head>";

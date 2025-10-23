@@ -95,13 +95,13 @@ function usr_msg()
 }
 
 function audit($conn, $userid, $code,$long){
-    $sql = "INSERT INTO audit(patientid,code,date,longdesc) VALUES(?,?,?,?)";
+    $sql = "INSERT INTO audit(patientid,code,longdesc,date) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $date = date("Y-m-d"); // this is the only structure that is accepted
     $stmt->bindParam(1, $userid);
-    $stmt->bindParam(2, $date);
+    $stmt->bindParam(2, $code);
     $stmt->bindParam(3, $long);
-    $stmt->bindParam(4, $code);
+    $stmt->bindParam(4, $date);
 
     $stmt->execute();
     $conn = null;
@@ -109,7 +109,7 @@ function audit($conn, $userid, $code,$long){
 }
 function login($conn, $usrname){
     try {  //try this code, catch errors
-        $sql = "SELECT patientid, password FROM user WHERE username = ?"; //set up the sql statement
+        $sql = "SELECT patientid, password FROM patient WHERE username = ?"; //set up the sql statement
         $stmt = $conn->prepare($sql); //prepares
         $stmt->bindParam(1,$usrname);  //binds the parameters to execute
         $stmt->execute(); //run the sql code
@@ -131,13 +131,13 @@ function login($conn, $usrname){
         exit; // Stop further execution
     }
 }
-function getnewuserid($conn, $email){  # upon registering, retrieves the userid from the system to audit.
-    $sql = "SELECT patientid FROM user WHERE username = ?"; //set up the sql statement
+function getnewuserid($conn, $username){  # upon registering, retrieves the userid from the system to audit.
+    $sql = "SELECT patientid FROM patient WHERE username = ?"; //set up the sql statement
     $stmt = $conn->prepare($sql); //prepares
-    $stmt->bindParam(1, $email);
+    $stmt->bindParam(1, $username);
     $stmt->execute(); //run the sql code
     $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
-    return $result["user_id"];
+    return $result['patientid'];
 }
 function staff_getter($conn){
     $sql = "SELECT staff_id, role, fname, sname, room WHERE role != ? ORDER BY role DESC";
@@ -163,4 +163,22 @@ function commit_booking($conn, $epoch){
     $stmt->execute();  //run the query to insert
     $conn = null;  // closes the connection so cant be abused.
     return true; // Registration successful
+}
+function appt_getter($conn){
+    /* all the field names have a letter before the column this is referanceing to a table in a database
+    so b would be bookings and s is the staff table we use bookings b to be able to use b as a referance same as staff s
+    on is telling where to do the join*/
+    $sql = "SELECT b.bookingid, b.patientid, b.appointmentdate, b.dateofbooking, s.role, s.fname, s.sname, s.room FROM bookings b JOIN staff s on 
+    b.staffid = s.staffid WHERE b.patientid = ? ORDER BY b.appointmentdate DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_SESSION['userid']);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    if($result){
+        return $result;
+    }else {
+        return false;
+    }
+
 }

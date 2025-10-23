@@ -22,7 +22,7 @@ echo"<div class = 'content'>";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if(create_new(dbconnect_insert(),$_POST)) {
-    audit(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['userid']), "reg","New user registered");
+    audit(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['username']), "reg","New user registered");
     $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
     header("Location: login.php");
     exit;

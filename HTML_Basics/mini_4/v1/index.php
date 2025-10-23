@@ -1,4 +1,5 @@
 <?php
+require_once "assets/common.php";
 // opens php code section
 if (!isset($_GET['message'])) {
     session_start();
@@ -22,7 +23,7 @@ require_once "assets/nav.php";
 
 echo "<div class = 'content'>";
 
-//content here
+echo usr_msg();
 
 echo "</div>";
 echo "</div>";
