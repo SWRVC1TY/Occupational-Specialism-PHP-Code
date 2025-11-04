@@ -21,12 +21,13 @@ echo"<h2>Register:</h2>";
 echo"<div class = 'content'>";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if(create_new(dbconnect_insert(),$_POST)) {
-    audit(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['username']), "reg","New user registered");
-    $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
-    header("Location: login.php");
-    exit;
-
+    if(is_user_unique(dbconnect_insert(),$_POST['username'])){
+        if(create_new(dbconnect_insert(),$_POST)) {
+            audit(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "New user registered");
+            $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+            header("Location: login.php");
+            exit;
+    }
     } elseif(!is_user_unique(dbconnect_insert(),$_POST['username'])) {
         $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
     } else {
