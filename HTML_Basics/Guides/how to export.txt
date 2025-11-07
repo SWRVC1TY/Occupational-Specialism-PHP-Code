@@ -1,0 +1,4 @@
+open laragon
+go to terminal
+mysqldump -u root -p primary_oaks > primaryoakdb.sql
+on laragon press root and the file should appear

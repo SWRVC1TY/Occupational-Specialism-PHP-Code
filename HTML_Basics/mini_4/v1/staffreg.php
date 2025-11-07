@@ -21,22 +21,31 @@ echo"<h2>Register:</h2>";
 echo"<div class = 'content'>";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    try {
+        if (!is_user_unique(dbconnect_insert(), $_POST["username"])) {
 
-    if(!is_user_unique(dbconnect_insert(), $_POST["username"])){
+            if (create_new(dbconnect_insert(), $_POST)) {
+                staff_audit(dbconnect_insert(), getnewuserid(dbconnect_insert(), $_POST['username']), "reg", "New user registered");
+                $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+                header("Location: login.php");
+                exit;
 
-        if(create_new(dbconnect_insert(),$_POST)) {
-            audit(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['username']), "reg","New user registered");
-            $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
-            header("Location: login.php");
-            exit;
-
+            } else {
+                $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
+            }
         } else {
-            $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
+            $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
         }
-    } else {
-        $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
+        echo usr_msg();
+    } catch (PDOException $e) {
+        //handle database errors
+        error_log("User reg database error: " . $e->getMessage());
+        throw new PDOException("User reg database error" . $e);
+    } catch (Exception $e) {
+        //catch any other errors
+        error_log("User registration error: " . $e->getMessage());
+        throw new Exception("User registration error" . $e);
     }
-    echo usr_msg();
 }
 
 echo "<form method='POST' action=''>"; // sends data to post

@@ -1,17 +1,17 @@
 <?php # stores reuseable code for all pages
 
-function is_user_unique($conn, $POST)
+function is_user_unique($conn, $user)
 {
 
     $sql = "SELECT username FROM patient WHERE username = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(1, $POST);
+    $stmt->bindParam(1, $user);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) { // if the user name exists then return true
-        return true;
-    } else { // if not return false
         return false;
+    } else { // if not return false
+        return true;
     }
 }
 
@@ -70,6 +70,9 @@ function usr_msg()
 function audit($conn, $userid, $code,$long){
     $sql = "INSERT INTO audit(patientid,code,longdesc,date) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
+    // bind parameters for security
+    // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
+    // which makes it less likely for someone to hijack the sql statement
     $date = date("Y-m-d"); // this is the only structure that is accepted
     $stmt->bindParam(1, $userid);
     $stmt->bindParam(2, $code);
@@ -107,6 +110,9 @@ function login($conn, $usrname){
 function getnewuserid($conn, $username){  # upon registering, retrieves the userid from the system to audit.
     $sql = "SELECT patientid FROM patient WHERE username = ?"; //set up the sql statement
     $stmt = $conn->prepare($sql); //prepares
+    // bind parameters for security
+    // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
+    // which makes it less likely for someone to hijack the sql statement
     $stmt->bindParam(1, $username);
     $stmt->execute(); //run the sql code
     $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
@@ -115,7 +121,10 @@ function getnewuserid($conn, $username){  # upon registering, retrieves the user
 function staff_getter($conn){
     $sql = "SELECT staffid, fname, sname, role, room FROM STAFF WHERE role != ? ORDER BY role DESC";
     $stmt = $conn->prepare($sql);
-    $exclude_role = "adm";
+    // bind parameters for security
+    // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
+    // which makes it less likely for someone to hijack the sql statement
+    $exclude_role = "adm"; // excluding the admin role as it is not needed as an option in the bokking system
     $stmt->bindParam(1, $exclude_role);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -125,8 +134,10 @@ function staff_getter($conn){
 function commit_booking($conn, $epoch){
     $sql = "INSERT INTO bookings (patientid,staffid,dateofbooking,appointmentdate) VALUES (?,?,?,?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
-
-    $stmt->bindParam(1, $_SESSION['userid']);  //bind parameters for security
+    // bind parameters for security
+    // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
+    // which makes it less likely for someone to hijack the sql statement
+    $stmt->bindParam(1, $_SESSION['userid']);
     $stmt->bindParam(2, $_POST['staff']);
     $tmp = time();
     $stmt->bindParam(3, $tmp);
@@ -180,6 +191,20 @@ function appt_update($conn, $bookingid, $appttime){
     $stmt->bindParam(1, $_POST['staff']);
     $stmt->bindParam(2, $appttime);
     $stmt->bindParam(3, $bookingid);
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
+
+function staff_audit($conn, $userid, $code,$long){
+    $sql = "INSERT INTO saudit(patientid,code,longdesc,date) VALUES(?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $date = date("Y-m-d"); // this is the only structure that is accepted
+    $stmt->bindParam(1, $userid);
+    $stmt->bindParam(2, $code);
+    $stmt->bindParam(3, $long);
+    $stmt->bindParam(4, $date);
+
     $stmt->execute();
     $conn = null;
     return true;
