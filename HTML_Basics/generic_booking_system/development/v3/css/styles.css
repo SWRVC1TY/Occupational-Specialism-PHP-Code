@@ -1,0 +1,78 @@
+/* Container setup */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Navbar styling */
+nav ul {
+    list-style-type: none; /* remove default list styling */
+    margin: 0; /* remove default margin */
+    padding: 0; /* remove default padding */
+    display: flex; /* horizontal list */
+    justify-content: flex-start;
+    background-color: #009FBF; /* Deep Cyan navbar background */
+}
+
+nav li {
+    padding: 5px 20px; /* spacing for links */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #F5F9FA; /* Light Cloud text for contrast */
+    transition: color 0.3s ease;
+}
+
+nav li:hover {
+    background-color: #00CFFF; /* Electric Cyan hover */
+}
+
+nav li a:hover {
+    color: #2B2B2B; /* Dark Charcoal text on hover */
+}
+
+/* Topbar (banner area) */
+.topbar {
+    width: 100%;
+    height: 200px;
+    background-color: #A7E6FF; /* Soft Sky Cyan background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Banner image inside topbar */
+.topbar img {
+    max-width: 200%;         /* Scale image to fit container width */
+    height: 200px;            /* Maintain aspect ratio */
+    display: block;          /* Remove inline spacing */
+    object-fit: contain;     /* Keep full image visible inside container */
+}
+
+/* Body styling */
+body {
+    background-color: #F5F9FA; /* Light Cloud main background */
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #2B2B2B; /* Dark Charcoal primary text */
+}
+
+/* Content area */
+.content {
+    text-align: center;
+    font-size: x-large;
+    color: #2B2B2B; /* Dark Charcoal */
+    font-family: Arial Microsoft Himalaya sans-serif;
+    padding: 20px;
+}
+
+/* Headings */
+h2 {
+    color: #009FBF; /* Deep Cyan for headings */
+}
