@@ -3,7 +3,7 @@
 function is_user_unique($conn, $user)
 {
 
-    $sql = "SELECT username FROM user WHERE username = ?";
+    $sql = "SELECT username FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $user);
     $stmt->execute();
@@ -20,7 +20,7 @@ function create_new($conn, $POST)
 {
 
         /*we are preparing the statement to send of to the database to help prevent sql injection attacks*/
-        $sql = "INSERT INTO user(username, password, fname, sname, dob) VALUES(?, ?, ?, ?,?)";
+        $sql = "INSERT INTO users(username, password, fname, sname, dob) VALUES(?, ?, ?, ?,?)";
         $stmt = $conn->prepare($sql);
 
         // bind parameters for security
@@ -82,7 +82,7 @@ function login($conn, $usrname){
     }
 }
 function getnewuserid($conn, $username){  # upon registering, retrieves the userid from the system to audit.
-    $sql = "SELECT userid FROM user WHERE username = ?"; //set up the sql statement
+    $sql = "SELECT userid FROM users WHERE username = ?"; //set up the sql statement
     $stmt = $conn->prepare($sql); //prepares
     // bind parameters for security
     // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
@@ -93,7 +93,7 @@ function getnewuserid($conn, $username){  # upon registering, retrieves the user
     return $result['userid'];
 }
 function commit_booking($conn, $epoch,$post){
-    $sql = "INSERT INTO bookings (userid,appdate,type,datebooked,location) VALUES (?,?,?,?,?)";  //prepare the sql to be sent
+    $sql = "INSERT INTO booking (userid,appdate,type,datebooked,location) VALUES (?,?,?,?,?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
     // bind parameters for security
     // this binds data from the form to the sql statement this makes it more secure from an sql injection attack

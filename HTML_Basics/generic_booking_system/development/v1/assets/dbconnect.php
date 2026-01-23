@@ -10,7 +10,7 @@ function dbconnect_insert(){
     $servername = "localhost"; // sets server name
     $dbusername = "root"; // name of the user
     $dbpassword = "";// users password
-    $dbname = "rolsa_tech"; // database name
+    $dbname = "database"; // database name
 
     try{ // trying code and catching errors
         $conn = new PDO("mysql:host=$servername;port=3306;dbname=$dbname", $dbusername, $dbpassword);

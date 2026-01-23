@@ -6,7 +6,6 @@ echo "<ul>";
 
 // Navigation Buttons (each in a table cell)
 echo "<li><a href='index.php'>Home</a></li>";   // Link to View Bookings page
-echo "<li><a href='carbonfootprintcalc.php'>Carbon Footprint Calulator</a></li>";
 
 if (!isset($_SESSION['userid'])){
     echo "<li><a href='login.php'>Login</a></li>";  // Link to page 1
