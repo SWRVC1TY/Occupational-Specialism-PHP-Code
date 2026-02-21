@@ -1,21 +1,21 @@
-<?php // opens php code section
+<?php
 
 session_start();
 
 require_once "assets/dbconnect.php";
 require_once "assets/common.php";
-
+$rooms = getrooms(dbconnect_insert());
+$services = getservices(dbconnect_insert());
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // this needs to load before anything else so it will actualy load rarther than crash due to if headers are in here and
 // this is not before html code the headers will be loaded and the errors will get thrown
 
     try {
         $tmp = $_POST["appt_date"] . " " . $_POST["appt_time"];
-        $epoch = strtotime($tmp); // pre-assigning to a variable to help reduce the risk of errors (this is the best practice)
-        if(commit_booking(dbconnect_insert(),$epoch)){
+        $epoch = strtotime($tmp); // pre assining to a variable to help reduce the risk of errors (this is the best practice)
+        if(commit_booking(dbconnect_insert(),$epoch,$_POST)) {
+            if (linkservices(dbconnect_insert(), $_POST))
             $_SESSION['usermessage'] = "SUCESS: Your booking has been confirmed";
-            header("location: bookins.php");
-            exit;
         } else {
             $_SESSION['usermessage'] = "ERROR: Your booking has not been confirmed";
         }
@@ -45,34 +45,39 @@ require_once "assets/nav.php";
 
 echo"<div class = 'content'>";
 echo usr_msg();
-
+echo "Please specify your booking date and time below:";
 echo"<form action='' method='post' >";
 
-$staff = staff_getter(dbconnect_insert());
-
-echo"<label for='appt_time'> Appointment Time: </label>";
+echo"<label for='appt_time'> Booking Time: </label>";
 echo"<input type = 'time' name ='appt_time' required>";
 
 echo"<br>";
 
-echo"<label for='appt_date'> Appointment date: </label>";
+echo"<label for='appt_date'> Booking Date: </label>";
 echo"<input type = 'date' name ='appt_date' required>";
 
 echo"<br>";
 
-echo"<select name='staff'>";
+echo"<label for='guests'> Guests: </label>";
+echo"<input type = 'number' name ='guests' required>";
 
-foreach ($staff as $staf){
-
-    if ($staf['role'] == 'doc'){
-        $role = "Doctor:";
-    }
-    else if ($staf['role'] == 'nur'){
-        $role = "Nurse:";
-    }
-    echo"<option value='".$staf['staffid']."'>".$role." ".$staf['sname']." ".$staf['fname']." "."Room ".$staf['room']."</option>";
-
+echo"<br>";
+echo"<label for='room'> room: </label>";
+echo"<select name='room'>";
+foreach ($rooms as $room) {
+    echo "<option value='{$room['roomid']}'>{$room['roomname']}</option>";
 }
+echo"</select>";
+echo"<br>";
+echo"<label for='services'> Services: </label>";
+echo"<br>";
+foreach ($services as $service) {
+    echo "<label>";
+    echo "<input type='checkbox' name='services[]' value='" .$service['serviceid']. "'>";
+    echo $service['servicename'];
+    echo "</label><br>";
+}
+echo"<br>";
 echo"<input type='submit' name='submit' value='Submit'>";
 echo"</form>";
 
@@ -81,4 +86,3 @@ echo"</div>";
 
 echo"</body>";
 echo"</html>";
-?>

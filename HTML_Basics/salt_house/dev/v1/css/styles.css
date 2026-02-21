@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+nav ul {
+    list-style-type: none; /* remove default breakpoints*/
+    margin:0; /* removes default margin*/
+    padding:0; /* removes default padding*/
+    display: flex; /* Makes the list horizontal with justify content*/
+    justify-content: flex-start; /* */
+    background-color: white; /* */
+}
+nav li{
+    padding: 5px 20px 5px 20px; /* padding for the top right bottle left so links are not to close*/
+    background-color: darkgrey;
+    font-size: 20px;
+    font-weight: bold;
+}
+nav li a{
+    text-decoration: none;
+}
+nav li:hover{
+    background-color: #4E468C;
+}
+.topbar{
+    /* enter top bar styling here*/
+}
+body {
+    background-color: #EAEDDC;
+}
+
+.content{
+    text-align: center;
+    font-size: x-large;
+    font-family: Arial Microsoft Himalaya sans-serif;
+    color: #4E468C;
+}
