@@ -6,7 +6,11 @@ require_once "assets/dbconnect.php";
 require_once "assets/common.php";
 $rooms = getrooms(dbconnect_insert());
 $services = getservices(dbconnect_insert());
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if (!isset($_SESSION['userid'])) {  # If they have managed to get to this page without loggining
+    $_SESSION['usermessage'] = "ERROR: You are not logged in!";
+    header("Location: login.php");
+    exit;
+} elseif($_SERVER["REQUEST_METHOD"] === "POST") {
 // this needs to load before anything else so it will actualy load rarther than crash due to if headers are in here and
 // this is not before html code the headers will be loaded and the errors will get thrown
 

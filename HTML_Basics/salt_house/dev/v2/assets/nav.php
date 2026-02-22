@@ -14,6 +14,7 @@ if (!isset($_SESSION['userid'])){
 else { // used if statement to show pages on log in status to remove attack vectors
     echo "<li><a href='bookin.php'>Book in</a></li>";  // Link to page 2
     echo "<li><a href='logout.php'>Logout</a></li>";
+    echo "<li><a href='viewbookings.php'>View Bookings</a></li>";
 }
 echo "</ul>";
 

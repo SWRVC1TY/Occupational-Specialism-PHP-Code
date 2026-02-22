@@ -184,7 +184,7 @@ function check_end_time($endEpoch,$startEpoch)
     return true;
 }
 function commit_booking($conn, $starttime,$endtime,$epoch,$totalprice,$post){
-    $sql = "INSERT INTO bookings (userid,roomid,dateofbooking,starttime,endtime,guests,totalprice) VALUES (?,?,?,?,?,?,?)";  //prepare the sql to be sent
+    $sql = "INSERT INTO bookings (userid,roomid,dateofbooking,starttime,endtime,guests,bookingprice) VALUES (?,?,?,?,?,?,?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
     // bind parameters for security
     // this binds data from the form to the sql statement this makes it more secure from an sql injection attack
@@ -192,11 +192,11 @@ function commit_booking($conn, $starttime,$endtime,$epoch,$totalprice,$post){
     $stmt->bindParam(1, $_SESSION['userid']);
     $tmp = time();
     $stmt->bindParam(2, $_POST['room']);
-    $stmt->bindParam(3, $epoch);
+    $stmt->bindParam(3, $tmp);
     $stmt->bindParam(4, $starttime);
     $stmt->bindParam(5, $endtime);
     $stmt->bindParam(6, $_POST['guests']);
-    $stmt->bindParam(6, $_POST['totalprice']);
+    $stmt->bindParam(7, $totalprice);
 
     $stmt->execute();  //run the query to insert
     $conn = null;  // closes the connection so cant be abused.
@@ -213,7 +213,8 @@ function getmostrecentbooking($conn){
 }
 function linkservices($conn, $post){
     $bookingid = getmostrecentbooking($conn);
-    foreach ($_POST['services'] as $service_id) {
+    if (!empty($serviceIds))
+        foreach ($_POST['services'] as $service_id) {
         $sql = "INSERT INTO bookingservices (bookingid,serviceid) VALUES (?,?)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(1, $bookingid);
@@ -221,5 +222,97 @@ function linkservices($conn, $post){
         $stmt->execute();
     }
     $conn = null;  // nulls off the connection so cant be abused.
+    return true;
+}
+
+function booking_getter($conn){
+    /* all the field names have a letter before the column this is referanceing to a table in a database
+    so b would be bookings and s is the staff table we use bookings b to be able to use b as a referance same as staff s
+    on is telling where to do the join*/
+    $sql = "SELECT b.bookingid,b.dateofbooking, b.starttime, b.endtime, r.roomname, b.guests, b.bookingprice AS total_price
+     , GROUP_CONCAT(s.servicename ORDER BY s.servicename SEPARATOR ', ') AS services FROM bookings b JOIN rooms r 
+         ON r.roomid = b.roomid LEFT JOIN bookingservices bs ON bs.bookingid = b.bookingid LEFT JOIN services s ON 
+             s.serviceid = bs.serviceid WHERE b.userid = ? GROUP BY b.bookingid, b.starttime, b.endtime, r.roomname,
+b.guests, b.bookingprice ORDER BY b.starttime DESC;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_SESSION['userid']);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    if($result){
+        return $result;
+    }else {
+        return false;
+    }
+
+}
+
+function cancel_booking($conn, $bookingid){
+    $sql = "DELETE FROM bookings WHERE bookingid = ?"; // sql statment to delete the booking
+    $stmt = $conn->prepare($sql); // preparing the statment for execution
+    $stmt->bindParam(1, $bookingid);// binding parameters for security
+    $stmt->execute();// executes the statment
+    $sql = "DELETE FROM bookingservice WHERE bookingid = ?"; // sql statment to delete the services linked to the booking
+    $stmt = $conn->prepare($sql); // preparing the statment for execution
+    $stmt->bindParam(1, $bookingid);// binding parameters for security
+    $stmt->execute();// executes the statment
+    $conn = null; // closes the connection to the database
+    return true; // confirms that the sql has happened
+}
+
+function fetch_booking($conn, $bookingid){
+    $sql = "SELECT b.bookingid,b.roomid,b.starttime,b.endtime,b.dateofbooking,b.guests,
+        b.bookingprice AS total_price,r.roomname,
+        GROUP_CONCAT(s.servicename ORDER BY s.servicename SEPARATOR ', ') AS services
+        FROM bookings b
+        JOIN rooms r ON r.roomid=b.roomid
+        LEFT JOIN bookingservices bs ON bs.bookingid=b.bookingid
+        LEFT JOIN services s ON s.serviceid=bs.serviceid
+        WHERE b.bookingid=?
+        GROUP BY b.bookingid,b.starttime,b.endtime,b.dateofbooking,b.guests,b.bookingprice,r.roomname";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $bookingid);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
+}
+function update_services($conn, $services): void
+{
+        $sql = "DELETE FROM bookingservices WHERE bookingid = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $_SESSION["bookingid"]);
+        $stmt->execute();
+
+    if (!empty($_POST['services'])) {
+        foreach ($_POST['services'] as $service_id) {
+            $sql = "INSERT INTO bookingservices (bookingid,serviceid) VALUES (?,?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $_SESSION["bookingid"]);
+            $stmt->bindParam(2, $service_id);
+            $stmt->execute();
+        }
+    }
+}
+function booking_update($conn,$starttime,$endtime,$tprice,$post){
+    $sql = "UPDATE bookings
+                SET roomid = ?,
+                    starttime = ?,
+                    endtime = ?,
+                    guests = ?,
+                    bookingprice = ?
+                WHERE bookingid = ?
+                  AND userid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $post['room']);
+    $stmt->bindParam(2, $starttime);
+    $stmt->bindParam(3, $endtime);
+    $stmt->bindParam(4, $post['guests']);
+    $stmt->bindParam(5, $tprice);
+    $stmt->bindParam(6, $_SESSION["bookingid"]);
+    $stmt->bindParam(7, $_SESSION['userid']);
+    $stmt->execute();
+    update_services($conn,$post);
+    $conn = null;
     return true;
 }
